@@ -2,36 +2,51 @@ import sys
 # sys.stdin = open('input.txt')
 input = sys.stdin.readline
 
-'''
-# 두 분수가 주어졌을 때, 그 합을 기약분수의 형태로 구하는 프로그램
-'''
+"""
+# 분수 합
+ 1. 두 분수가 주어졌을 때, 그 합을 기약분수의 형태로 구하기
+[입력]
+ 1. A: 분자, B: 분모
+ 2. C: 분자, D: 분모
+[출력]
+ 1. 구하고자 하는 기약분수의 분자와 분모를 뜻하는 두 개의 자연수를 빈 칸을 사이에 두고 출력
+"""
 
-# 분자와 분모를 뜻하는 두 개의 자연수 두 줄
-A1, B1 = map(int, input().split())
-A2, B2 = map(int, input().split())
+"""
+<출력>
+ 1. 일단 풀어보기
+"""
+
 
 # 최대공약수 함수
-def GCD(A, B):
-    while A > 1:
-        if B == 0:
-            break
-        A, B = B, (A % B)
-    return A
+def GCD(num1, num2):
+    # 나누어 떨어질 경우 나눠진 수
+    if not num2:
+        return num1
+    # 나누어 떨어지지 않을 경우 더 잘게 나누기
+    else:
+        return GCD(num2, num1 % num2)
+
 
 # 최소공배수 함수
-def LCM(A, B):
-    result = (A * B) // GCD(A, B)
-    return result
+def LCM(num1, num2):
+    # 두 수의 곱 / 두 수의 최대공약수 = 두 수의 최소공배수
+    return int((num1 * num2) / GCD(num1, num2))
 
-# 통분하기(분자: A3, 분모: B3)
-# 각 분모의 최소공배수로 통분
-B3 = LCM(B1, B2)
-# 최소공배수가 되기위해 곱한 값만큼 분자에도 곱해서 더해주기
-A3 = (A1 * (B3 // B1)) + (A2 * (B3 // B2))
-# 분자와 분모의 최대공약수를 구하기
-gcd = GCD(A3, B3)
-# 분자와 분모를 최대공약수로 나눠서 기약분수로 만들기
-A4 = A3 // gcd
-B4 = B3 // gcd
 
-print(A4, B4)
+# 분자 A, 분모 B
+A, B = map(int, input().split())
+# 분자 C, 분모 D
+C, D = map(int, input().split())
+
+# 분모의 최소공배수 구하기
+lcm = LCM(B, D)
+# 분자에도 분모에 곱한 수만큼 곱하기
+A *= lcm // B
+C *= lcm // D
+# 분자 더하기
+son = A + C
+# 분자와 분모의 최대공약수 구하기
+gcd = GCD(son, lcm)
+# 분자와 분모를 최대공약수로 나눈 수로 출력
+print(son // gcd, lcm // gcd)
