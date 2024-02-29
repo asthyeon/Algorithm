@@ -29,7 +29,7 @@ A = list(map(int, input().split()))
 
 # 가능한 모든 조합 만들어내기
 answer = 0
-for r in range(1, N + 1):
+for r in range(2, N + 1):
     for choices in combinations(A, r):
         if L <= sum(choices) <= R and max(choices) - min(choices) >= X:
             answer += 1
