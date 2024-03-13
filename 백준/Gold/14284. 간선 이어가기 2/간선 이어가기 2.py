@@ -19,6 +19,9 @@ input = sys.stdin.readline
 <풀이>
  1. 다익스트라
  2. 길게 먼저 도착하는 경우도 있으므로 다 돌아보기
+ 3. 간선을 정렬하면 도착지에 먼저 도착 가능시 종료 가능할까?
+  - 다음 탐색시에 도달하는 건 불가능
+  - 현재 위치가 도달했을 때는? -> 간선 정렬 안해도 상관없음
 """
 import heapq
 INF = 10e9
@@ -33,6 +36,10 @@ def dijkstra(graph, s, t):
 
     while hq:
         dist, now = heapq.heappop(hq)
+
+        # 목적지에 도달하면 종료
+        if now == t:
+            return dist
 
         # 다음 탐색
         for new in graph[now]:
@@ -57,5 +64,4 @@ for _ in range(m):
 
 # 마지막 정점
 s, t = map(int, input().split())
-
 print(dijkstra(graph, s, t))
