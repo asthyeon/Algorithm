@@ -62,13 +62,18 @@ for _ in range(N):
     # 가장 가까운 사대일 때 거리 계산
     if abs(shooting[closest] - a) + b <= L:
         total += 1
+        continue
+
     # 가장 가까운 사대 오른쪽 사대가 범위 안일 때
-    elif closest + 1 < M:
+    if closest + 1 < M:
         if abs(shooting[closest + 1] - a) + b <= L:
             total += 1
+            continue
+
     # 가장 가까운 사대 왼쪽 사대가 범위 안일 때
-    elif closest - 1 >= 0:
+    if closest - 1 >= 0:
         if abs(shooting[closest - 1] - a) + b <= L:
             total += 1
+            continue
 
 print(total)
