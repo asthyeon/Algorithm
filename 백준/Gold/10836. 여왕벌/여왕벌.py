@@ -75,6 +75,6 @@ for x in range(M):
             # 그 외
             else:
                 # 더 큰 값 따라가기
-                print(max(larvae[x][0], larvae[0][y]), end=" ")
+                print(max(max(larvae[x][:y + 1]), larvae[0][y]), end=" ")
     print()
 
