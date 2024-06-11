@@ -25,56 +25,43 @@ input = sys.stdin.readline
 <풀이>
  1. 일단 풀어보기
  2. 입력 값으로 주어지는 애들만 미리 성장 -> 나머지는 큰 값 따라가기
+ 3. 2차원 배열 -> 시간초과 -> 1차원 배열로 만들기
+ 3 3 4 5
+ 3
+ 2
+ 2
 """
 
+
+# 애벌레 성장도 출력
+def level(larvae):
+    # 역순으로 출력
+    for i in range(M - 1, -1, -1):
+        # 맨 위쪽 행일 때는 바로 출력
+        if i == M - 1:
+            print(*larvae[M - 1:])
+        # 다른 행일 때는 맨 왼쪽 열 + 맨 위쪽 행(첫 열 제외)
+        else:
+            print(*([larvae[i]] + larvae[M:]))
+
+
 M, N = map(int, input().split())
-# 애벌레들
-larvae = [[1] * M for _ in range(M)]
+# 애벌레들(맨 왼쪽 열 마지막 ~ 맨 위 행 마지막)
+larvae = [1] * (2 * M - 1)
 for _ in range(N):
     zero, one, two = map(int, input().split())
 
-    # 성장해야 할 좌표
-    x = M - 1
-    y = 0
-    # 맨 왼쪽 열과 맨 위쪽 행만 성장
-    for n in range(2 * M - 1):
-        # 성장도 0
-        if zero:
-            if not x:
-                y += 1
-            else:
-                x -= 1
-            zero -= 1
-        # 성장도 1
-        elif one:
-            larvae[x][y] += 1
-            if not x:
-                y += 1
-            else:
-                x -= 1
+    # 0은 안더하니까 건너뛰기
+    for i in range(zero, 2 * M - 1):
+        if one:
+            larvae[i] += 1
             one -= 1
-        # 성장도 2
         else:
-            larvae[x][y] += 2
-            if not x:
-                y += 1
-            else:
-                x -= 1
-            two -= 1
+            larvae[i] += 2
 
-# 애벌레 성장도 출력
-for x in range(M):
-    for y in range(M):
-        # 맨 위쪽 행
-        if x == 0:
-            print(larvae[x][y], end=" ")
-        else:
-            # 맨 왼쪽 열
-            if y == 0:
-                print(larvae[x][y], end=" ")
-            # 그 외
-            else:
-                # 더 큰 값 따라가기
-                print(max(max(larvae[x][:y + 1]), larvae[0][y]), end=" ")
-    print()
+level(larvae)
+
+
+
+
 
