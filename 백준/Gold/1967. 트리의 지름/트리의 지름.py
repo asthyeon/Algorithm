@@ -23,29 +23,31 @@ input = sys.stdin.readline
 from collections import deque
 
 
-def bfs(tree):
-    # 가장 큰 지름
+def bfs(tree, start):
+    # 가장 큰 지름과 노드 번호
     diameter = 0
+    node = 0
 
     # 끝 노드부터 시작
-    for start in range(n, 0, -1):
-        q = deque([(0, start)])
-        visited = [0] * (n + 1)
-        visited[start] = 1
+    q = deque([(0, start)])
+    visited = [0] * (n + 1)
+    visited[start] = 1
 
-        while q:
-            dist, now = q.popleft()
+    while q:
+        dist, now = q.popleft()
 
-            # 정답 교체
-            diameter = max(diameter, dist)
+        # 새로운 노드 탐색
+        for new_dist, new in tree[now]:
+            if not visited[new]:
+                visited[new] = 1
+                q.append((dist + new_dist, new))
 
-            # 새로운 노드 탐색
-            for new_dist, new in tree[now]:
-                if not visited[new]:
-                    visited[new] = 1
-                    q.append((dist + new_dist, new))
+                # 거리 갱신
+                if diameter < dist + new_dist:
+                    diameter = dist + new_dist
+                    node = new
 
-    return diameter
+    return diameter, node
 
 
 n = int(input())
@@ -58,4 +60,10 @@ for _ in range(n - 1):
     tree[child].append((weight, parent))
     tree[parent].append((weight, child))
 
-print(bfs(tree))
+# 루트 노드에서 가장 먼 노드 찾아 시작할 노드로 지정
+_, start_node = bfs(tree, 1)
+
+# 가장 먼 노드에서 지름 구하기
+answer, far_node = bfs(tree, start_node)
+
+print(answer)
