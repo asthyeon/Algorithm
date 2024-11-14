@@ -25,7 +25,7 @@ input = sys.stdin.readline
 <풀이>
  1. 벨만 포드
  2. 양수 값으로 고려 해야하고, 버는 돈을 생각하기
- 3. 싸이클이 발생한 지점에서 도착지점에 도달할 수 있는지 확인하기(도착지 시작)
+ 3. 싸이클이 발생한 지점에서 도착지점에 도달할 수 있는지 확인하기(출발지 시작)
 """
 from collections import deque
 
@@ -53,7 +53,7 @@ def bellman_ford(transportations, earnings):
                     # N번째(마지막) 라운드에서도 갱신이 된다면 순환이 발생한 것
                     if i == N:
                         # 사이클이 생기는 지점에서 도착지로 갈 수 있는지 확인
-                        if bfs(new, cities):
+                        if bfs(now, cities):
                             return 'Gee'
 
     # 방문하지 않았다면 gg
