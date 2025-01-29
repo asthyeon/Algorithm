@@ -1,0 +1,23 @@
+-- 코드를 입력하세요
+SELECT
+    BASE.CAR_ID,
+    CASE
+        WHEN MEET.CAR_ID IS NOT NULL THEN '대여중'
+        ELSE '대여 가능'
+    END AS 'AVAILABILITY'
+FROM
+    CAR_RENTAL_COMPANY_RENTAL_HISTORY BASE
+    -- 조건을 만족하는 CAR_ID 조인
+    LEFT JOIN (
+        SELECT
+            CAR_ID
+        FROM
+            CAR_RENTAL_COMPANY_RENTAL_HISTORY
+        WHERE
+            '2022-10-16' BETWEEN START_DATE AND END_DATE
+    ) MEET
+    ON BASE.CAR_ID = MEET.CAR_ID
+GROUP BY
+    BASE.CAR_ID
+ORDER BY
+    BASE.CAR_ID DESC;
