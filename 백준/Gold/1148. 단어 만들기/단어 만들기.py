@@ -17,20 +17,16 @@ input = sys.stdin.readline
 """
 <풀이> 
  1. 구현 
- 2. 각 단어가 사전에 중복으로 존재할 수 있음 -> 사전을 set가 아닌 dict로 저장 
- 3. 단어가 가능한 최대 수는 20만개
 """
 from itertools import permutations
 
 # 사전 형성
-dictionary = {}
+dictionary = set()
 while True:
     word = input().rstrip()
     if word == '-':
         break
-    if word not in dictionary:
-        dictionary[word] = 0
-    dictionary[word] += 1
+    dictionary.add(word)
 
 # 퍼즐 형성
 while True:
@@ -52,9 +48,8 @@ while True:
             if string in dictionary:
                 if string not in used:
                     used.add(string)
-                    # 중복된 단어의 수만큼 증가
                     for s in set(string):
-                        alphabets[s] += dictionary[string]
+                        alphabets[s] += 1
 
     # 정답 구하기
     minimum = 200000
@@ -75,7 +70,7 @@ while True:
             max_answer = [a]
         elif alphabets[a] == maximum:
             max_answer.append(a)
-
+    
     # 정답 출력(알파벳은 사전순)
     print(''.join(sorted(min_answer)), minimum, ''.join(sorted(max_answer)), maximum)
 
