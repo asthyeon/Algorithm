@@ -1,14 +1,12 @@
 SELECT
     HD.DEPT_ID,
     HD.DEPT_NAME_EN,
-    -- 각 부서별 연봉 합을 각 부서 수로 나눈 후, 소수점 첫째 자리에서 반올림
-    ROUND((SUM(HE.SAL) / COUNT(HD.DEPT_ID)), 0) AS AVG_SAL
+    ROUND(AVG(HE.SAL), 0) AS AVG_SAL
 FROM
     HR_DEPARTMENT HD
-    -- NULL 값이 없도록 INNER JOIN
     INNER JOIN HR_EMPLOYEES HE
     ON HD.DEPT_ID = HE.DEPT_ID
-GROUP BY
+GROUP BY 
     HD.DEPT_ID
-ORDER BY
+ORDER BY 
     AVG_SAL DESC;
