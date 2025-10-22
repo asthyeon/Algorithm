@@ -1,4 +1,3 @@
--- 코드를 입력하세요
 SELECT
     FACTORY_ID,
     FACTORY_NAME,
@@ -8,4 +7,4 @@ FROM
 WHERE
     ADDRESS LIKE '강원도%'
 ORDER BY
-    FACTORY_ID;
+    FACTORY_ID ASC;
