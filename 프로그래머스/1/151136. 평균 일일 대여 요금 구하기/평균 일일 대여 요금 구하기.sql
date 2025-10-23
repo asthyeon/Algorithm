@@ -1,6 +1,6 @@
--- 코드를 입력하세요
+-- 자동차 종류 SUV, 평균 일일 대여 요금, 반올림 - ROUND
 SELECT
-    ROUND(AVG(DAILY_FEE), 0) AS AVERAGE_FEE
+    ROUND(AVG(DAILY_FEE)) AS AVERAGE_FEE
 FROM
     CAR_RENTAL_COMPANY_CAR
 WHERE
