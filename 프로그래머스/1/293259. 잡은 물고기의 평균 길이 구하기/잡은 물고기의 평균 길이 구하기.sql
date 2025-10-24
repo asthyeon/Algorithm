@@ -1,4 +1,4 @@
--- 코드를 작성해주세요
+-- 10cm 이하의 물고기들은 10cm로 취급(NULL 값이므로 COALESCE 사용)
 SELECT
     ROUND(AVG(COALESCE(LENGTH, 10)), 2) AS AVERAGE_LENGTH
 FROM
