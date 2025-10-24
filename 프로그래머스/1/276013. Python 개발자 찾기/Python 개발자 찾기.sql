@@ -1,4 +1,3 @@
--- 코드를 작성해주세요
 SELECT
     ID,
     EMAIL,
@@ -7,8 +6,6 @@ SELECT
 FROM
     DEVELOPER_INFOS
 WHERE
-    SKILL_1 = 'Python'
-    OR SKILL_2 = 'Python'
-    OR SKILL_3 = 'Python'
+    'Python' IN (SKILL_1, SKILL_2, SKILL_3)
 ORDER BY
-    ID;
+    ID ASC;
