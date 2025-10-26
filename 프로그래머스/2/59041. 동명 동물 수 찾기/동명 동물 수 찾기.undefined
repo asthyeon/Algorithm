@@ -1,14 +1,13 @@
--- 코드를 입력하세요
+-- GROUP BY로 이름별로 묶어서, HAVING으로 조건 만족하기
 SELECT
     NAME,
     COUNT(*) AS COUNT
-FROM
+FROM 
     ANIMAL_INS
-WHERE
-    NAME IS NOT NULL
 GROUP BY
     NAME
 HAVING
-    COUNT(NAME) > 1
+    COUNT(*) >= 2
+    AND NAME IS NOT NULL
 ORDER BY
     NAME;
