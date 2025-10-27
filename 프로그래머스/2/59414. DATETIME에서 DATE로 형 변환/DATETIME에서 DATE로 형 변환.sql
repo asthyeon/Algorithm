@@ -1,4 +1,4 @@
--- 코드를 입력하세요
+-- DATE_FORMANT으로 날짜 형태 변경 -> DATE_FORMAT(날짜, '%Y-%M-%D'): Y, y, M, m, D, d
 SELECT
     ANIMAL_ID,
     NAME,
