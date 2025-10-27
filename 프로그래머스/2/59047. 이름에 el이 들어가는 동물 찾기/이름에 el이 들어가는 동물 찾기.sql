@@ -1,11 +1,11 @@
--- 코드를 입력하세요
+-- 동물의 종 -> 개 유의
 SELECT
     ANIMAL_ID,
     NAME
 FROM
-    ANIMAL_INS
+    ANIMAL_INS 
 WHERE
     ANIMAL_TYPE = 'Dog'
-    AND NAME LIKE '%EL%'
+    AND NAME LIKE '%el%'
 ORDER BY
     NAME;
