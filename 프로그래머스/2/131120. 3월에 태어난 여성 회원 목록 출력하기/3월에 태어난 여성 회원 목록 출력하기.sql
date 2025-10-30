@@ -1,4 +1,4 @@
--- 코드를 입력하세요
+-- 생일이 3월인 여성 유의
 SELECT
     MEMBER_ID,
     MEMBER_NAME,
@@ -7,8 +7,8 @@ SELECT
 FROM
     MEMBER_PROFILE
 WHERE
-    TLNO IS NOT NULL
-    AND DATE_OF_BIRTH LIKE '%-03-%'
+    DATE_OF_BIRTH LIKE '%-03-%'
     AND GENDER = 'W'
+    AND TLNO IS NOT NULL
 ORDER BY
-    MEMBER_ID;
+    MEMBER_ID ASC;
