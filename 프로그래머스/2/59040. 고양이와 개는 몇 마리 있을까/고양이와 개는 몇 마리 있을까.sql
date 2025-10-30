@@ -1,10 +1,13 @@
--- 코드를 입력하세요
 SELECT
     ANIMAL_TYPE,
     COUNT(*) AS count
-FROM    
+FROM
     ANIMAL_INS
 GROUP BY
     ANIMAL_TYPE
+-- 고양이와 개로 그룹화
+HAVING
+    ANIMAL_TYPE = 'Cat'
+    OR ANIMAL_TYPE = 'Dog'
 ORDER BY
     ANIMAL_TYPE;
