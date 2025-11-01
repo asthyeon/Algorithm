@@ -1,11 +1,16 @@
--- 코드를 작성해주세요
+/*
+A -> B 업그레이드가 가능할 때, A를 B의 PARENT 아이템이라고 한다
+ROOT 아이템: PARENT가 없는 아이템
+*/
+
+-- PARENT_ITEM_ID 가 NULL 인 값 찾기
 SELECT
     II.ITEM_ID,
     II.ITEM_NAME
 FROM
     ITEM_INFO II
-    LEFT JOIN ITEM_TREE IT
-    ON II.ITEM_ID = IT.ITEM_ID
+    JOIN ITEM_TREE IT
+        ON II.ITEM_ID = IT.ITEM_ID
 WHERE
     IT.PARENT_ITEM_ID IS NULL
 ORDER BY
