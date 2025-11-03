@@ -1,4 +1,5 @@
--- 코드를 입력하세요
+-- 유저와 상품을 그룹화, 그 때 COUNT한 수가 2개 이상인 경우 SELECT
+
 SELECT
     USER_ID,
     PRODUCT_ID
@@ -10,5 +11,5 @@ GROUP BY
 HAVING
     COUNT(*) >= 2
 ORDER BY
-    USER_ID,
+    USER_ID ASC,
     PRODUCT_ID DESC;
