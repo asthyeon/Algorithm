@@ -1,4 +1,6 @@
--- 코드를 작성해주세요
+-- 각 분기를 나눠야함 -> CASE 한후 그룹화
+-- 분화된 대장균 개체 수 -> ID 개수
+
 SELECT
     CASE
         WHEN MONTH(DIFFERENTIATION_DATE) BETWEEN 1 AND 3 THEN '1Q'
@@ -12,4 +14,4 @@ FROM
 GROUP BY
     QUARTER
 ORDER BY
-    QUARTER;
+    QUARTER ASC;
