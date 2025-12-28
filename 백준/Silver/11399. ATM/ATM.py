@@ -3,26 +3,25 @@ import sys
 input = sys.stdin.readline
 
 """
-# 각 사람이 돈을 인출하는데 필요한 시간의 최솟값 구하기
-1. ATM 앞에 N 명의 줄
-2. i 번 사람이 돈을 인출하는데 걸리는 시간 P분
-@ 풀이
-(1) 시간 순으로 정렬
+[문제] ATM (11399)
+1. 줄을 서는 순서에 따라 돈을 인출하는데 필요한 시간의 합이 달라짐
+2. 각 사람이 돈을 인출하는데 필요한 시간의 합의 최솟값 구하기
+
+[풀이]
+1. 정렬
+2. P가 적은 순서대로 정렬후 누적합
 """
 
-# 사람의 수 N
 N = int(input())
-
-# 각 사람이 돈을 인출하는데 걸리는 시간 P
 P = list(map(int, input().split()))
-P.sort()
 
-# 누적합 구하기
-prefix_sum = [0] * N
+# 정렬 및 누적합
+P_sort = sorted(P)
+Prefix_sum = [0] * N
 for i in range(N):
     if i == 0:
-        prefix_sum[i] = P[0]
+        Prefix_sum[i] = P_sort[0]
     else:
-        prefix_sum[i] = prefix_sum[i - 1] + P[i]
+        Prefix_sum[i] = Prefix_sum[i-1] + P_sort[i]
 
-print(sum(prefix_sum))
+print(sum(Prefix_sum))
