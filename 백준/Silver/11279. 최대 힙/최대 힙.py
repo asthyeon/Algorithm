@@ -3,24 +3,30 @@ import sys
 input = sys.stdin.readline
 
 """
-# 최대 힙 (11279)
-1. 최대힙
-"""
-import  heapq
+[문제] 최대 힙 (11279)
+1. 연산 규칙
+ - x: 배열에 자연수 x 넣기
+ - 0: 배열에서 가장 큰 값 출력 및 배열에서 그 값 제거
+   (배열이 비어있는 경우 0 출력)
 
-# 연산 수와 힙
+[풀이]
+1. 우선순위 큐
+"""
+import heapq
+
 N = int(input())
-heap = []
+hq = []
 for _ in range(N):
     x = int(input())
-    
-    # 0 연산
+
+    # x가 0이라면
     if x == 0:
-        # 힙이 있을 때와 비어 있을 때
-        if heap:
-            print(heapq.heappop(heap)[1])
+        # hq가 비어있지 않다면 가장 큰 값 출력(부호 변환)
+        if hq:
+            print(-heapq.heappop(hq))
+        # hq가 비어있다면 0 출력
         else:
             print(0)
-    # 그 외 연산은 자연수 추가
+    # x가 자연수라면 음수로 넣기
     else:
-        heapq.heappush(heap, (-x, x))
+        heapq.heappush(hq, -x)
