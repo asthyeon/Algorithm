@@ -3,43 +3,32 @@ import sys
 input = sys.stdin.readline
 
 """
-# 가장 큰 증가하는 부분 수열(11055)
- 1. 수열 A가 주어졌을 때 그 수열의 증가하는 부분 수열 중에서 합이 가장 큰 것 구하기
-[입력]
- 1. N: 수열 A의 크기
- 2. A: 수열
-[출력]
- 1. 수열 A의 합이 가장 큰 증가하는 부분 수열의 합 출력
-"""
+[문제] 가장 큰 증가하는 부분 수열 (11055)
+1. 수열의 증가하는 부분 수열 중 합이 가장 큰 것 구하기 
 
-"""
-<풀이>
- 1. dp
- 2. 배열을 2개를 만들어서 가장 큰 증가하는 부분 수열의 길이와 합을 구하기
+[풀이]
+1. dp
 """
 
 
-# dp
 def dynamic_programming(A):
-    # 길이(기본 길이 1)
-    dp_len = [1] * N
-    # 합(기본 값
-    dp_sum = A[:]
+    # A 복사
+    dp = A[:]
 
-    for i in range(1, N):
-        # 자신보다 작은 수의길이 및 합 갱신
-        for j in range(i):
-            if A[j] < A[i]:
-                dp_len[i] = max(dp_len[i], dp_len[j] + 1)
-                dp_sum[i] = max(dp_sum[i], dp_sum[j] + A[i])
+    # 현재 위치까지
+    for end in range(N):
+        # 현재 위치보다 이전 값에서부터
+        for start in range(end):
+            # 증가하는 수열이라면
+            if A[start] < A[end]:
+                # 현재 위치 값 vs 이전 위치 값 + 현재 A 값
+                dp[end] = max(dp[end], dp[start] + A[end])
 
     # 가장 큰 합 반환
-    return max(dp_sum)
+    return max(dp)
 
 
-# 수열 A의 크기 N
 N = int(input())
-# 수열 A
 A = list(map(int, input().split()))
 
 print(dynamic_programming(A))
